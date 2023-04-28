@@ -39,6 +39,7 @@ public class Index extends JFrame {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
+                System.out.println(user.toString());
                 e.printStackTrace();
             }
         }
