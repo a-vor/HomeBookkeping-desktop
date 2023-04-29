@@ -10,5 +10,6 @@
     <orderEntry type="library" name="postgresql-42.6.0" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.27.2.1" level="project" />
     <orderEntry type="library" name="MigLayout" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
