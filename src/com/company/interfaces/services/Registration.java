@@ -1,4 +1,4 @@
-package com.company.interfaces;
+package com.company.interfaces.services;
 
 import com.company.controllers.UserController;
 import com.company.middleware.PasswordCheck;

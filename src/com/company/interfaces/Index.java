@@ -1,5 +1,7 @@
 package com.company.interfaces;
 
+import com.company.interfaces.services.Auth;
+import com.company.interfaces.services.Registration;
 import com.company.models.User;
 
 import javax.swing.*;
@@ -34,8 +36,7 @@ public class Index extends JFrame {
     }
     public static void main(String[] args) {
         Auth authFrame = new Auth();
-        User user = null;
-        user = waitingAuth(authFrame);
+        User user = waitingAuth(authFrame);
         Index index = new Index();
         System.out.println(user.toString());
     }
@@ -58,7 +59,6 @@ public class Index extends JFrame {
     }
 
     private static User waitingRegistration(Registration registrationFrame) {
-        User user = null;
         while (registrationFrame.getUser() == null) {
             try {
                 Thread.sleep(100);
@@ -66,7 +66,6 @@ public class Index extends JFrame {
                 e.printStackTrace();
             }
         }
-        user = registrationFrame.getUser();
-        return user;
+        return registrationFrame.getUser();
     }
 }
