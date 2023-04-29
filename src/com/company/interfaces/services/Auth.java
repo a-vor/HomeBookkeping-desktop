@@ -32,8 +32,6 @@ public class Auth extends JFrame implements ActionListener {
             public void mouseClicked(MouseEvent e) {
                 dispose();
                 isRegisterChange = true;
-//                Registration regFrame = new Registration();
-//                regFrame.setVisible(true);
             }
 
             @Override

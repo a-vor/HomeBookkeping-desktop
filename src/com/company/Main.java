@@ -1,7 +1,5 @@
 package com.company;
-import com.company.controllers.UserController;
 import com.company.models.User;
-import com.company.services.Auth;
 import com.company.services.Registration;
 
 import java.sql.Connection;

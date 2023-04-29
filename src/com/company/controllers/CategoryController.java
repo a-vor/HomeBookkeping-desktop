@@ -14,7 +14,4 @@ public class CategoryController {
         if (this.categories.isEmpty()) return 1;
         else return this.categories.size();
     }
-//    public String getCategoryName(int id) {
-//
-//    }
 }

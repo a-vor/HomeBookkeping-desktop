@@ -8,15 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.SQLException;
 
 public class Registration extends JFrame implements ActionListener {
-    private JTextField loginField;
-    private JTextField nameField;
-    private JTextField passwordField;
-    private JButton registerButton;
+    final private JTextField loginField;
+    private final JTextField nameField;
+    private final JTextField passwordField;
+    private final JButton registerButton;
 
     private User user = null;
     public Registration() {

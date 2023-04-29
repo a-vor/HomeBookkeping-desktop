@@ -1,7 +1,6 @@
 package com.company.services;
 
 import com.company.Database;
-import com.company.controllers.UserController;
 import com.company.models.User;
 
 import java.sql.Connection;
@@ -13,11 +12,11 @@ public class Registration {
         String sql = "INSERT INTO Users (login, name, password) VALUES (?, ?, ?)";
         Database database = new Database();
         try {
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, user.getLogin());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getPassword());
-            pstmt.executeUpdate();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, user.getLogin());
+            stmt.setString(2, user.getName());
+            stmt.setString(3, user.getPassword());
+            stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

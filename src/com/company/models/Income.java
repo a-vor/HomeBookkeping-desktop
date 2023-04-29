@@ -4,8 +4,8 @@ import com.company.Operations;
 
 public class Income extends Operations {
 
-    public Income(int id, int categoryId, int scoreId, int money, String rewiev){
-        super(id, categoryId, scoreId, money, rewiev);
+    public Income(int id, int categoryId, int scoreId, int money, String review){
+        super(id, categoryId, scoreId, money, review);
     }
 
     @Override
@@ -15,7 +15,7 @@ public class Income extends Operations {
                 ", categoryId=" + categoryId +
                 ", scoreId=" + scoreId +
                 ", money=" + money +
-                ", rewiev='" + rewiev + '\'' +
+                ", review='" + review + '\'' +
                 '}';
     }
 }

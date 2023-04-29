@@ -3,22 +3,22 @@ package com.company;
 public class Operations {
     public int id, categoryId, scoreId;
     public int money;
-    public String rewiev;
+    public String review;
 
-    public Operations(int id, int categoryId, int scoreId, int money, String rewiev) {
+    public Operations(int id, int categoryId, int scoreId, int money, String review) {
         this.id = id;
         this.categoryId = categoryId;
         this.scoreId = scoreId;
         this.money = money;
-        this.rewiev = rewiev;
+        this.review = review;
     }
 
-    public Operations(int categoryId, int scoreId, int money, String rewiev) {
+    public Operations(int categoryId, int scoreId, int money, String review) {
         this.id = id;
         this.categoryId = categoryId;
         this.scoreId = scoreId;
         this.money = money;
-        this.rewiev = rewiev;
+        this.review = review;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Operations {
                 ", categoryId=" + this.categoryId +
                 ", scoreId=" + this.scoreId +
                 ", money=" + this.money +
-                ", rewiev=" + this.rewiev +
+                ", review=" + this.review +
                 '}';
     }
 }
