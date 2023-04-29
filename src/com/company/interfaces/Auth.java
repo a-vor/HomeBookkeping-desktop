@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 
 public class Auth extends JFrame implements ActionListener {
@@ -15,21 +17,44 @@ public class Auth extends JFrame implements ActionListener {
     private JTextField loginField;
     private JTextField passwordField;
     private JButton registerButton;
-
+    private JLabel registerLabel;
     public boolean isAuth = false;
+    public boolean isRegisterChange = false;
 
     public Auth() {
         loginField = new JTextField(20);
         passwordField = new JTextField(20);
         registerButton = new JButton("Авторизация");
         registerButton.addActionListener(this);
+        registerLabel = new JLabel("Регистрация");
+        registerLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                isRegisterChange = true;
+//                Registration regFrame = new Registration();
+//                regFrame.setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
         panel.add(loginField);
         panel.add(passwordField);
         panel.add(registerButton);
-
+        panel.add(registerLabel);
         getContentPane().add(panel);
 
         setLocationRelativeTo(null);

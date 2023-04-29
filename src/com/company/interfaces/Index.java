@@ -35,16 +35,38 @@ public class Index extends JFrame {
     public static void main(String[] args) {
         Auth authFrame = new Auth();
         User user = null;
-        while (!authFrame.isAuth) {
+        user = waitingAuth(authFrame);
+        Index index = new Index();
+        System.out.println(user.toString());
+    }
+
+    private static User waitingAuth(Auth authFrame) {
+        User user = null;
+        while (!authFrame.isAuth && !authFrame.isRegisterChange) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                System.out.println(user.toString());
                 e.printStackTrace();
             }
         }
-        user = authFrame.getUser();
-        Index index = new Index();
-        System.out.println(user.toString());
+        if (authFrame.isAuth)
+            user = authFrame.getUser();
+        if (authFrame.isRegisterChange) {
+            user = waitingRegistration(new Registration());
+        }
+        return user;
+    }
+
+    private static User waitingRegistration(Registration registrationFrame) {
+        User user = null;
+        while (registrationFrame.getUser() == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        user = registrationFrame.getUser();
+        return user;
     }
 }
