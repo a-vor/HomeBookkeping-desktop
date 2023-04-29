@@ -30,7 +30,6 @@ public class UserController {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getLogin());
             ResultSet rs = stmt.executeQuery();
-//            System.out.println("here");
             if (rs.next()) {
                 if (user.getPassword().equals(rs.getString("password"))) {
                     user.setName(rs.getString("name"));
@@ -38,7 +37,6 @@ public class UserController {
                 } else return null;
             } else return null;
         } catch (SQLException e) {
-//            System.out.println("123Нет соединения с базой данных");
             System.out.println(e);
         }
         return user;
@@ -59,11 +57,14 @@ public class UserController {
 
     private boolean addUser(Connection connection, User user) throws SQLException {
         String sql = "INSERT INTO Users (login, name, password) VALUES (?, ?, ?)";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setString(1, user.getLogin()); // устанавливаем значение для первого параметра (login)
-        pstmt.setString(2, user.getName()); // устанавливаем значение для второго параметра (name)
-        pstmt.setString(3, user.getPassword()); // устанавливаем значение для третьего параметра (password)
-        pstmt.executeUpdate(); // выполнение запроса на вставку данны
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, user.getLogin());
+        stmt.setString(2, user.getName());
+        stmt.setString(3, user.getPassword());
+        stmt.executeUpdate();
+        ResultSet resultSet = stmt.getGeneratedKeys();
+        if (resultSet.next())
+            user.setId(resultSet.getInt(1));
         return true;
     }
 
