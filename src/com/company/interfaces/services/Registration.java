@@ -47,7 +47,7 @@ public class Registration extends JFrame implements ActionListener {
         final String password = passwordField.getText().trim();
         if (PasswordCheck.isValidParams(login, name, password)) {
             try {
-                this.user = new UserController().createUser(new User(login, name, PasswordCheck.hashPassword(password)));
+                this.user = UserController.createUser(new User(login, name, PasswordCheck.hashPassword(password)));
                 dispose();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
