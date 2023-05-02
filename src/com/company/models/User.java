@@ -71,6 +71,11 @@ public class User {
         return this.scores.add(score) ? true : false;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "User{" +

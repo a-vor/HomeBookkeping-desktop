@@ -17,17 +17,22 @@ public class ScoreController{
             System.out.println("существует");
             connection.close();
         } else {
-            addScore(connection, score);
+            addScore(connection, score, user.getId());
             connection.close();
         }
     }
 
-    private static void addScore(Connection connection, Score score) {
-
+    private static void addScore(Connection connection, Score score, int userId) throws SQLException {
+        String sql = "INSERT INTO Scores (title, sum, userId) VALUES (?, ?, ?)";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, score.getTitle());
+        stmt.setInt(2, score.getSum());
+        stmt.setInt(3, userId);
+        stmt.executeUpdate();
     }
 
     private static boolean isExistScore (String title, int id, Connection connection) {
-        String sql = "SELECT * FROM Scores WHERE title = ? AND userId = ?";
+        String sql = "SELECT * FROM Scores WHERE Title = ? AND userId = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1,
                     title);

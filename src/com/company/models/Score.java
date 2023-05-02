@@ -1,11 +1,12 @@
 package com.company.models;
 
 public class Score {
-    private int id, sum, userId;
+    private int id, userId;
+    double  sum;
 
     private String title;
 
-    public Score(int id, int sum, int userId, String title) {
+    public Score(int id, double sum, int userId, String title) {
         this.id = id;
         this.sum = sum;
         this.userId = userId;
@@ -22,7 +23,7 @@ public class Score {
         return id;
     }
 
-    public int getSum() {
+    public double getSum() {
         return sum;
     }
 
@@ -38,7 +39,7 @@ public class Score {
         this.id = id;
     }
 
-    public void setSum(int sum) {
+    public void setSum(double sum) {
         this.sum = sum;
     }
 
