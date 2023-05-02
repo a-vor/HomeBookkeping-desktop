@@ -28,7 +28,8 @@ public class UserController {
         String sql = "SELECT * FROM Users WHERE login = ?";
         Connection connection = new Database().getConnection();
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, user.getLogin());
+            stmt.setString(1,
+                    user.getLogin());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 if (user.getPassword().equals(rs.getString("password"))) {
@@ -45,7 +46,8 @@ public class UserController {
     private static boolean isIncludeUser(Connection connection, String username) throws SQLException {
         String sql = "SELECT * FROM Users WHERE login = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, username);
+            stmt.setString(1,
+                    username);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) return true;
         } catch (SQLException e) {
@@ -58,9 +60,12 @@ public class UserController {
     private static boolean addUser(Connection connection, User user) throws SQLException {
         String sql = "INSERT INTO Users (login, name, password) VALUES (?, ?, ?)";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, user.getLogin());
-        stmt.setString(2, user.getName());
-        stmt.setString(3, user.getPassword());
+        stmt.setString(1,
+                user.getLogin());
+        stmt.setString(2,
+                user.getName());
+        stmt.setString(3,
+                user.getPassword());
         stmt.executeUpdate();
         ResultSet resultSet = stmt.getGeneratedKeys();
         if (resultSet.next())

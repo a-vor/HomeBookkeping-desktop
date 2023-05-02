@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class Database {
     Connection connection;
-    private final String url = "jdbc:sqlite:./database/db.db";
+    private static final String url = "jdbc:sqlite:./database/db.db";
 
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(this.url);
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url);
     }
 
     public void closeConnection(Connection connection) throws SQLException {

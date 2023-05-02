@@ -25,9 +25,12 @@ public class ScoreController{
     private static void addScore(Connection connection, Score score, int userId) throws SQLException {
         String sql = "INSERT INTO Scores (title, sum, userId) VALUES (?, ?, ?)";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, score.getTitle());
-        stmt.setDouble(2, score.getSum());
-        stmt.setInt(3, userId);
+        stmt.setString(1,
+                score.getTitle());
+        stmt.setDouble(2,
+                score.getSum());
+        stmt.setInt(3,
+                userId);
         stmt.executeUpdate();
     }
 
@@ -45,5 +48,19 @@ public class ScoreController{
             return false;
         }
         return false;
+    }
+
+    public static ResultSet getAllScores (User user) throws SQLException {
+        Connection connection = new Database().getConnection();
+        String sql = "SELECT * FROM Scores WHERE userId = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1,
+                    user.getId());
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println("Нет соединения с базой данных");
+        }
+        return null;
     }
 }
