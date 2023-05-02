@@ -13,7 +13,7 @@ public class Score {
         this.title = title;
     }
 
-    public Score(int sum, int userId, String title) {
+    public Score(double sum, int userId, String title) {
         this.sum = sum;
         this.userId = userId;
         this.title = title;

@@ -1,19 +1,27 @@
 package com.company.interfaces.components;
 
+import com.company.controllers.ScoreController;
+import com.company.controllers.UserController;
+import com.company.models.Score;
+import com.company.models.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-public class Score extends JFrame implements ActionListener {
+public class ScoreFrame extends JFrame implements ActionListener {
+    public User user;
     private final JTextField title;
     private final JTextField sum;
     private final JButton confirm;
 
-    public Score() {
+    public ScoreFrame() {
         this.title = new JTextField(20);
         this.sum = new JTextField(20);
         this.confirm = new JButton("Подтвердить");
+        confirm.addActionListener(this);
         JPanel panel = new JPanel();
         panel.add(title);
         panel.add(sum);
@@ -27,11 +35,21 @@ public class Score extends JFrame implements ActionListener {
         setVisible(true);
     }
     public static void main(String[] args) {
-        new Score();
+        new ScoreFrame();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        final String titleText = title.getText();
+        final double sumScore = Double.parseDouble(sum.getText());
+        this.user = new User("1", "sdhjf");
+        user.setId(1);
+        Score score = new Score(sumScore, user.getId(), titleText);
+        try {
+            ScoreController.createScore(score, user);
+            dispose();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
