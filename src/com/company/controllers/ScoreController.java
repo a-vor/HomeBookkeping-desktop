@@ -26,7 +26,7 @@ public class ScoreController{
         String sql = "INSERT INTO Scores (title, sum, userId) VALUES (?, ?, ?)";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, score.getTitle());
-        stmt.setInt(2, score.getSum());
+        stmt.setDouble(2, score.getSum());
         stmt.setInt(3, userId);
         stmt.executeUpdate();
     }
