@@ -49,7 +49,7 @@ public class UserController {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) return true;
         } catch (SQLException e) {
-            System.out.println("1Нет соединения с базой данных");
+            System.out.println("Нет соединения с базой данных");
             return false;
         }
         return false;

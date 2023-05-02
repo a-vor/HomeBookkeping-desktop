@@ -10,8 +10,8 @@ import java.util.Date;
 
 public class Income extends JFrame implements ActionListener {
     private User user;
-    private JTextField sumField;
-    private JDateChooser dateChooser;
+    private final JTextField sumField;
+    private final JDateChooser dateChooser;
     final private JButton confirmButton;
     final private JLabel addCategoryLabel;
 
