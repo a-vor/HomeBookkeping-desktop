@@ -11,8 +11,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Index extends JFrame {
+    User user;
     private ScoresPanel scoresPanel;
-    public Index() {
+    public Index(User user) {
+        this.user = user;
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setJMenuBar(new TopMenu());
         scoresPanel = new ScoresPanel();
@@ -26,6 +28,7 @@ public class Index extends JFrame {
     }
 
     private void setDefaultSettings() {
+        this.setTitle("Домашняя бухгалтерия | " + user.getName());
         this.setSize(700, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -60,7 +63,7 @@ public class Index extends JFrame {
     public static void main(String[] args) {
         Auth authFrame = new Auth();
         User user = waitingAuth(authFrame);
-        Index index = new Index();
+        Index index = new Index(user);
         System.out.println(user.toString());
     }
 
