@@ -1,6 +1,7 @@
 package com.company.interfaces;
 
 import com.company.interfaces.components.ActionsMenu;
+import com.company.interfaces.components.ScoreActions;
 import com.company.interfaces.components.ScoresPanel;
 import com.company.interfaces.components.TopMenu;
 import com.company.interfaces.services.Auth;
@@ -18,11 +19,13 @@ public class Index extends JFrame {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setJMenuBar(new TopMenu());
         scoresPanel = new ScoresPanel();
+        scoresPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
         BoxLayout layout = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
         getContentPane().setLayout(layout);
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         getContentPane().add(new ActionsMenu());
         getContentPane().add(scoresPanel);
+        getContentPane().add(new ScoreActions());
         setDefaultSettings();
 
     }
@@ -34,32 +37,6 @@ public class Index extends JFrame {
         this.setVisible(true);
     }
 
-    private void getScoresTable() {
-
-//        setContentPane(contentPane); //
-    }
-    private void createMenu() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem openItem = new JMenuItem("Open");
-        JMenuItem saveItem = new JMenuItem("Save");
-        JMenuItem exitItem = new JMenuItem("Exit");
-        JMenu addIncome = new JMenu("Income");
-        JMenuItem addOneTimeCharge = new JMenuItem("Разовый расход");
-        JMenuItem addPeriodicCharge = new JMenuItem("Периодический расход расход");
-        exitItem.addActionListener((event) -> System.exit(0)); // обработка события выхода из приложения
-        fileMenu.add(openItem);
-        fileMenu.add(saveItem);
-        fileMenu.addSeparator();
-        fileMenu.add(exitItem);
-//        pack();
-        addIncome.add(addOneTimeCharge);
-        addIncome.add(addPeriodicCharge);
-
-        menuBar.add(fileMenu);
-        menuBar.add(addIncome);
-//        this.setJMenuBar(menuBar); // добавление меню на фрейм
-    }
     public static void main(String[] args) {
         Auth authFrame = new Auth();
         User user = waitingAuth(authFrame);
