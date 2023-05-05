@@ -21,12 +21,14 @@ public class Index extends JFrame {
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         getContentPane().add(new ActionsMenu());
         getContentPane().add(scoresPanel);
-//        createMenu();
-//        getScoresTable();
-//        setLocationRelativeTo(null);
-        setSize(700, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setDefaultSettings();
+
+    }
+
+    private void setDefaultSettings() {
+        this.setSize(700, 500);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     private void getScoresTable() {
