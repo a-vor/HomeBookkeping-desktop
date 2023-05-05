@@ -1,4 +1,4 @@
-package com.company;
+package com.company.models;
 
 public class Operations {
     public int id, categoryId, scoreId;

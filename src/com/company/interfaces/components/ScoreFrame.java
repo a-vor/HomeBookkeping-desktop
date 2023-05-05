@@ -17,7 +17,8 @@ public class ScoreFrame extends JFrame implements ActionListener {
     private final JTextField sum;
     private final JButton confirm;
 
-    public ScoreFrame() {
+    public ScoreFrame(User user) {
+        this.user = user;
         this.title = new JTextField(20);
         this.sum = new JTextField(20);
         this.confirm = new JButton("Подтвердить");
@@ -35,7 +36,7 @@ public class ScoreFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
     public static void main(String[] args) {
-        new ScoreFrame();
+        new ScoreFrame(null);
     }
 
     @Override

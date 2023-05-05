@@ -1,7 +1,5 @@
 package com.company.models;
 
-import com.company.Operations;
-
 public class Income extends Operations {
 
     public Income(int id, int categoryId, int scoreId, int money, String review){
