@@ -1,5 +1,6 @@
 package com.company.interfaces;
 
+import com.company.interfaces.components.ActionsMenu;
 import com.company.interfaces.components.ScoresPanel;
 import com.company.interfaces.services.Auth;
 import com.company.interfaces.services.Registration;
@@ -9,10 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Index extends JFrame {
+    private ScoresPanel scoresPanel;
     public Index() {
+        scoresPanel = new ScoresPanel();
         BoxLayout layout = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
         getContentPane().setLayout(layout);
-        getContentPane().add(new ScoresPanel());
+        getContentPane().add(new ActionsMenu());
+        getContentPane().add(scoresPanel);
 //        createMenu();
 //        getScoresTable();
 //        setLocationRelativeTo(null);
