@@ -2,6 +2,7 @@ package com.company.interfaces;
 
 import com.company.interfaces.components.ActionsMenu;
 import com.company.interfaces.components.ScoresPanel;
+import com.company.interfaces.components.TopMenu;
 import com.company.interfaces.services.Auth;
 import com.company.interfaces.services.Registration;
 import com.company.models.User;
@@ -12,9 +13,12 @@ import java.awt.*;
 public class Index extends JFrame {
     private ScoresPanel scoresPanel;
     public Index() {
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.setJMenuBar(new TopMenu());
         scoresPanel = new ScoresPanel();
         BoxLayout layout = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
         getContentPane().setLayout(layout);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
         getContentPane().add(new ActionsMenu());
         getContentPane().add(scoresPanel);
 //        createMenu();
