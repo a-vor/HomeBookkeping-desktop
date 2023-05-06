@@ -35,11 +35,18 @@ public class UserController {
                 if (user.getPassword().equals(rs.getString("password"))) {
                     user.setName(rs.getString("name"));
                     user.setId(rs.getInt("id"));
-                } else return null;
-            } else return null;
+                } else {
+                    connection.close();
+                    return null;
+                }
+            } else {
+                connection.close();
+                return null;
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        connection.close();
         return user;
     }
 

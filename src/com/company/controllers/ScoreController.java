@@ -4,10 +4,7 @@ import com.company.Database;
 import com.company.models.Score;
 import com.company.models.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ScoreController{
     public static void createScore (Score score, User user) throws SQLException {
@@ -50,13 +47,15 @@ public class ScoreController{
         return false;
     }
 
-    public static ResultSet getAllScores (User user) throws SQLException {
+    public static ResultSet getAllScores (User user, ResultSetMetaData meta) throws SQLException {
         Connection connection = new Database().getConnection();
-        String sql = "SELECT * FROM Scores WHERE userId = ?";
+        String sql = "SELECT * FROM Scores";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1,
-                    user.getId());
+//            stmt.setInt(1,
+//                    user.getId());
             ResultSet rs = stmt.executeQuery();
+            meta = rs.getMetaData();
+            connection.close();
             return rs;
         } catch (SQLException e) {
             System.out.println("Нет соединения с базой данных");
