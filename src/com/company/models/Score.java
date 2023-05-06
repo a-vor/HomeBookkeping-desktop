@@ -1,19 +1,39 @@
 package com.company.models;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Score {
-    ResultSet resultSet;
-    ResultSetMetaData metaData;
+    ArrayList<Object[]> resultList;
+    ArrayList<String> columnNames;
     private int id, userId;
     double  sum;
 
     private String title;
 
     public Score(ResultSet resultSet, ResultSetMetaData metaData) {
-        this.resultSet = resultSet;
-        this.metaData = metaData;
+        int columnCount = 0;
+        try {
+            columnCount = metaData.getColumnCount();
+            for (int i = 0; i < columnCount; i++)
+                columnNames.add(metaData.getColumnLabel(i+1));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            while (resultSet.next()) {
+                Object[] row = new Object[columnCount];
+                for (int i = 1; i <= columnCount; i++) {
+                    row[i - 1] = resultSet.getObject(i);
+                }
+                resultList.add(row);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Score(int id, double sum, int userId, String title) {
@@ -45,12 +65,12 @@ public class Score {
         return title;
     }
 
-    public ResultSet getResultSet() {
-        return resultSet;
+    public ArrayList<Object[]> getResultList() {
+        return resultList;
     }
 
-    public ResultSetMetaData getMetaData() {
-        return metaData;
+    public ArrayList<String> getColumnNames() {
+        return columnNames;
     }
 
     public void setId(int id) {
