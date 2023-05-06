@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class ScoresPanel extends JPanel{
     User user;
@@ -16,14 +18,10 @@ public class ScoresPanel extends JPanel{
         this.user = user;
         final int columnAmount = 4;
         ResultSet rs = ScoreController.getAllScores(user);
-        Object [][] data = new Object[getRowsAmount(rs)][columnAmount];
-        fillData(data, rs);
-//        Object[][] data = {
-//                {"Иван", "Иванов", 25, 11},
-//                {"Петр", "Петров", 30, 11},
-//                {"Сидор", "Сидоров", 35, 11}
-//        };
-        final String[] columnNames = {"Cчет", "Баланс", "Доход", "Расход"};
+        ResultSetMetaData metaData = rs.getMetaData();
+        Vector<String> columnNames = new Vector<String>();
+        getColumnNames(metaData, columnNames);
+
         JTable table = new JTable(data, columnNames);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.getColumnModel().getColumn(0).setPreferredWidth(15);
@@ -37,18 +35,10 @@ public class ScoresPanel extends JPanel{
         this.add(contentPane);
     }
 
-    private int getRowsAmount(ResultSet rs) throws SQLException {
-        rs.last();
-        final int rowCount = rs.getRow();
-        rs.first();
-        return rowCount;
-    }
-
-    private void fillData(Object[][] data, ResultSet rs) throws SQLException {
-        int i = 0;
-        while(rs.next()) {
-            data[i][0] = rs.getString("title");
-            data[i][1] =
+    private void getColumnNames(ResultSetMetaData metaData, Vector<String> columnNames) throws SQLException {
+        int columnCount = metaData.getColumnCount();
+        for (int i = 1; i <= columnCount; i++) {
+            columnNames.add(metaData.getColumnName(i));
         }
     }
 }
