@@ -14,8 +14,8 @@ import java.sql.SQLException;
 
 public class Index extends JFrame {
     User user;
-    private ScoresPanel scoresPanel;
-    public Index(User user) throws SQLException {
+    private final ScoresPanel scoresPanel;
+    public Index(User user){
         this.user = user;
         System.out.println(user.toString());
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -41,7 +41,7 @@ public class Index extends JFrame {
     public static void main(String[] args) throws SQLException {
         Auth authFrame = new Auth();
         User user = waitingAuth(authFrame);
-        Index index = new Index(user);
+        new Index(user);
         System.out.println(user.toString());
     }
 

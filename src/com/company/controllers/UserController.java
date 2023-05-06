@@ -50,7 +50,7 @@ public class UserController {
         return user;
     }
 
-    private static boolean isIncludeUser(Connection connection, String username) throws SQLException {
+    private static boolean isIncludeUser(Connection connection, String username){
         String sql = "SELECT * FROM Users WHERE login = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1,
@@ -64,7 +64,7 @@ public class UserController {
         return false;
     }
 
-    private static boolean addUser(Connection connection, User user) throws SQLException {
+    private static void addUser(Connection connection, User user) throws SQLException {
         String sql = "INSERT INTO Users (login, name, password) VALUES (?, ?, ?)";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1,
@@ -77,7 +77,6 @@ public class UserController {
         ResultSet resultSet = stmt.getGeneratedKeys();
         if (resultSet.next())
             user.setId(resultSet.getInt(1));
-        return true;
     }
 
     public void getUsers() throws SQLException {
