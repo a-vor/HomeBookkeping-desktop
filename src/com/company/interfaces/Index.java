@@ -29,7 +29,6 @@ public class Index extends JFrame {
         getContentPane().add(scoresPanel);
         getContentPane().add(new ScoreActions());
         setDefaultSettings();
-
     }
 
     private void setDefaultSettings() {

@@ -4,6 +4,9 @@ import com.company.Database;
 import com.company.models.Score;
 import com.company.models.User;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.sql.*;
 
 public class ScoreController{
@@ -47,19 +50,33 @@ public class ScoreController{
         return false;
     }
 
-    public static ResultSet getAllScores (User user, ResultSetMetaData meta) throws SQLException {
-        Connection connection = new Database().getConnection();
-        String sql = "SELECT * FROM Scores";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-//            stmt.setInt(1,
-//                    user.getId());
-            ResultSet rs = stmt.executeQuery();
-            meta = rs.getMetaData();
-            connection.close();
-            return rs;
+    public static JTable getAllScores (User user) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable table = new JTable(tableModel);
+        try {
+            Connection conn = Database.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM scores");
+            tableModel.setRowCount(0);
+            ResultSetMetaData meta = rs.getMetaData();
+            int colCount = meta.getColumnCount();
+            for (int i = 1; i <= colCount; i++) {
+                tableModel.addColumn(meta.getColumnName(i));
+                System.out.println(meta.getColumnName(i));
+            }
+            while (rs.next()) {
+                Object[] row = new Object[colCount];
+                for (int i = 1; i <= colCount; i++) {
+                    row[i - 1] = rs.getObject(i);
+                }
+                tableModel.addRow(row);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
         } catch (SQLException e) {
-            System.out.println("Нет соединения с базой данных");
+            e.printStackTrace();
         }
-        return null;
+        return table;
     }
 }
