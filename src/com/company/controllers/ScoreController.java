@@ -49,33 +49,18 @@ public class ScoreController{
         return false;
     }
 
-    public static JTable getAllScores (User user) {
-        DefaultTableModel tableModel = new DefaultTableModel();
-        JTable table = new JTable(tableModel);
+    public static Score getAllScores (User user) {
+        String sql = "SELECT * FROM Scores";
+        Connection connection = null;
         try {
-            Connection conn = Database.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM scores");
-            tableModel.setRowCount(0);
-            ResultSetMetaData meta = rs.getMetaData();
-            int colCount = meta.getColumnCount();
-            for (int i = 1; i <= colCount; i++) {
-                tableModel.addColumn(meta.getColumnName(i));
-                System.out.println(meta.getColumnName(i));
-            }
-            while (rs.next()) {
-                Object[] row = new Object[colCount];
-                for (int i = 1; i <= colCount; i++) {
-                    row[i - 1] = rs.getObject(i);
-                }
-                tableModel.addRow(row);
-            }
-            rs.close();
-            stmt.close();
-            conn.close();
+            connection = new Database().getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            Score score = new Score(rs, rs.getMetaData());
+            return score;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
+            return null;
         }
-        return table;
     }
 }

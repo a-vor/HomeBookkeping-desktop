@@ -1,10 +1,20 @@
 package com.company.models;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
 public class Score {
+    ResultSet resultSet;
+    ResultSetMetaData metaData;
     private int id, userId;
     double  sum;
 
     private String title;
+
+    public Score(ResultSet resultSet, ResultSetMetaData metaData) {
+        this.resultSet = resultSet;
+        this.metaData = metaData;
+    }
 
     public Score(int id, double sum, int userId, String title) {
         this.id = id;
@@ -33,6 +43,14 @@ public class Score {
 
     public String getTitle() {
         return title;
+    }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
+
+    public ResultSetMetaData getMetaData() {
+        return metaData;
     }
 
     public void setId(int id) {
