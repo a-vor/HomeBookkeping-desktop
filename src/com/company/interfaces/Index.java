@@ -10,15 +10,17 @@ import com.company.models.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class Index extends JFrame {
     User user;
     private ScoresPanel scoresPanel;
-    public Index(User user) {
+    public Index(User user) throws SQLException {
         this.user = user;
+        System.out.println(user.toString());
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setJMenuBar(new TopMenu());
-        scoresPanel = new ScoresPanel();
+        scoresPanel = new ScoresPanel(user);
         scoresPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
         BoxLayout layout = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
         getContentPane().setLayout(layout);
@@ -37,7 +39,7 @@ public class Index extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Auth authFrame = new Auth();
         User user = waitingAuth(authFrame);
         Index index = new Index(user);
