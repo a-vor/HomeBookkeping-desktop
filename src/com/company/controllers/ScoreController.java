@@ -49,15 +49,19 @@ public class ScoreController{
         return false;
     }
 
-    public static Score getAllScores (User user) {
+    public static ResultSet getAllScores (User user) {
         String sql = "SELECT * FROM Scores";
         Connection connection = null;
         try {
             connection = new Database().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-            Score score = new Score(rs, rs.getMetaData());
-            return score;
+            if (rs != null) {
+                System.out.println("ne null!");
+//                Score score = new Score(rs, rs.getMetaData());
+                return rs;
+            }
+            return null;
         } catch (SQLException e) {
             System.out.println(e);
             return null;

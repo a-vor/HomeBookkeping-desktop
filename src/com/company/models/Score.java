@@ -7,34 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Score {
-    ArrayList<Object[]> resultList;
-    ArrayList<String> columnNames;
     private int id, userId;
     double  sum;
 
     private String title;
-
-    public Score(ResultSet resultSet, ResultSetMetaData metaData) {
-        int columnCount = 0;
-        try {
-            columnCount = metaData.getColumnCount();
-            for (int i = 0; i < columnCount; i++)
-                columnNames.add(metaData.getColumnLabel(i+1));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            while (resultSet.next()) {
-                Object[] row = new Object[columnCount];
-                for (int i = 1; i <= columnCount; i++) {
-                    row[i - 1] = resultSet.getObject(i);
-                }
-                resultList.add(row);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public Score(int id, double sum, int userId, String title) {
         this.id = id;
@@ -63,14 +39,6 @@ public class Score {
 
     public String getTitle() {
         return title;
-    }
-
-    public ArrayList<Object[]> getResultList() {
-        return resultList;
-    }
-
-    public ArrayList<String> getColumnNames() {
-        return columnNames;
     }
 
     public void setId(int id) {
