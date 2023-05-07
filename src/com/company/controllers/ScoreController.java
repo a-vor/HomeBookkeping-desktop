@@ -50,14 +50,22 @@ public class ScoreController{
     }
 
     public static ResultSet getAllScores (User user) {
-        String sql = "SELECT * FROM Scores";
+        String sql = "SELECT title, sum FROM Scores WHERE userId = ?";
         Connection connection = null;
         try {
             connection = new Database().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, user.getId());
             ResultSet rs = stmt.executeQuery();
             if (rs != null) {
-                System.out.println("ne null!");
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = metaData.getColumnName(i);
+                    System.out.println(columnName);
+                }
+                System.out.println("here " + user.toString());
 //                Score score = new Score(rs, rs.getMetaData());
                 return rs;
             }

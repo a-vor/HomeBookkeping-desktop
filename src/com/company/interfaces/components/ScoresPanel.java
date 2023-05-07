@@ -22,12 +22,14 @@ public class ScoresPanel extends JPanel {
 //        }
 
 //        JTable table = new JTable(resultSet, new Object[] {"id", "title", "sum", "userId"});
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"N", "Cчет", "Баланс", "userId"}, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"N", "Cчет", "Баланс"}, 0);
         try {
+            int number = 1;
             // Проходим по всем строкам resultSet, добавляя каждую строку в модель таблицы
             while (resultSet.next()) {
-                Object[] row = {resultSet.getInt("id"), resultSet.getString("title"), resultSet.getInt("sum"), resultSet.getInt("userId")};
+                Object[] row = {number, resultSet.getString("title"), resultSet.getInt("sum")};
                 tableModel.addRow(row);
+                number++;
             }
         } catch (SQLException e) {
             e.printStackTrace();
