@@ -15,19 +15,10 @@ public class ScoresPanel extends JPanel {
     public ScoresPanel(User user){
         this.user = user;
         System.out.println("Из scores Panel : " + user.toString());
-        ResultSet resultSet = ScoreController.getAllScores(user);
+        Object[][] data = ScoreController.getAllScores(user);
         DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"N", "Cчет", "Баланс"}, 0);
-        try {
-            int number = 1;
-            // Проходим по всем строкам resultSet, добавляя каждую строку в модель таблицы
-            while (resultSet.next()) {
-                Object[] row = {number, resultSet.getString("title"), resultSet.getDouble("sum")};
-                tableModel.addRow(row);
-                number++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        for (int i = 0; i < data.length; i++)
+            tableModel.addRow(data[i]);
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
 
