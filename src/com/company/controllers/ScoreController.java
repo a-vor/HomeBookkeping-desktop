@@ -3,9 +3,6 @@ package com.company.controllers;
 import com.company.Database;
 import com.company.models.Score;
 import com.company.models.User;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
 public class ScoreController{
@@ -13,7 +10,6 @@ public class ScoreController{
         System.out.println("вызвал score controller");
         Connection connection = new Database().getConnection();
         if (isExistScore(score.getTitle(), score.getUserId(), connection)) {
-            System.out.println("существует");
             connection.close();
         } else {
             addScore(connection, score, user.getId());
@@ -50,26 +46,13 @@ public class ScoreController{
     }
 
     public static ResultSet getAllScores (User user) {
-        String sql = "SELECT title, sum FROM Scores WHERE userId = ?";
-        Connection connection = null;
+        String sql = "SELECT Scores.title, Balances.sum\nFROM Scores\nJOIN Balances ON Scores.id = Balances.scoreId\nWHERE Scores.userId = ?";
         try {
-            connection = new Database().getConnection();
+            Connection connection = new Database().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, user.getId());
             ResultSet rs = stmt.executeQuery();
-            if (rs != null) {
-                ResultSetMetaData metaData = rs.getMetaData();
-                int columnCount = metaData.getColumnCount();
-
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnName = metaData.getColumnName(i);
-                    System.out.println(columnName);
-                }
-                System.out.println("here " + user.toString());
-//                Score score = new Score(rs, rs.getMetaData());
-                return rs;
-            }
-            return null;
+            return rs;
         } catch (SQLException e) {
             System.out.println(e);
             return null;
