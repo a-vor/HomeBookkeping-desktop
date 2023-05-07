@@ -1,7 +1,6 @@
 package com.company.controllers;
 
 import com.company.Database;
-import com.company.middleware.DimeensionSQLQuery;
 import com.company.models.Score;
 import com.company.models.User;
 import java.sql.*;
@@ -44,38 +43,19 @@ public class ScoreController{
         return false;
     }
 
-    public static Object[][] getAllScores (User user) {
+    public static ResultSet getAllScores (User user) {
         String sql = "SELECT Scores.title, Balances.sum\nFROM Scores\nJOIN Balances ON Scores.id = Balances.scoreId\nWHERE Scores.userId = ?";
         try {
             Connection connection = new Database().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, user.getId());
             ResultSet rs = stmt.executeQuery();
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            Object[][] data = new Object[DimeensionSQLQuery.getRowCount(rs)][columnCount];
-            int rowIndex = 0;
-            while (rs.next()) {
-                // Итерация по каждому столбцу строки
-                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                    // Получение значения ячейки ResultSet
-                    Object value = rs.getObject(columnIndex);
-
-                    // Запись значения в массив
-                    data[rowIndex][columnIndex-1] = value;
-                }
-                rowIndex++;
-            }
-            connection.close();
-            return data;
+            return rs;
         } catch (SQLException e) {
             System.out.println(e);
             return null;
         }
     }
-
-
-
 }
 
 

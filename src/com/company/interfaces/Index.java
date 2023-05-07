@@ -38,11 +38,11 @@ public class Index extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Auth authFrame = new Auth();
         User user = waitingAuth(authFrame);
         new Index(user);
-        System.out.println(user.toString());
+        System.out.println(user);
     }
 
     private static User waitingAuth(Auth authFrame) {
