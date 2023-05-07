@@ -5,9 +5,8 @@ import com.company.models.Score;
 import com.company.models.User;
 import java.sql.*;
 
-public class ScoreController{
+public class ScoreController {
     public static void createScore (Score score, User user) throws SQLException {
-        System.out.println("вызвал score controller");
         Connection connection = new Database().getConnection();
         if (isExistScore(score.getTitle(), score.getUserId(), connection)) {
             connection.close();
@@ -18,13 +17,20 @@ public class ScoreController{
     }
 
     private static void addScore(Connection connection, Score score, int userId) throws SQLException {
-        String sql = "INSERT INTO Scores (title, userId) VALUES (?, ?)";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1,
+        String sqlToScores = "INSERT INTO Scores (title, userId) VALUES (?, ?)";
+        String sqlToBalances = "INSERT INTO Balances (scoreId, sum) VALUES (?, ?)";
+        PreparedStatement stmtToScores = connection.prepareStatement(sqlToScores);
+        PreparedStatement stmtToBalances = connection.prepareStatement(sqlToBalances);
+        stmtToScores.setString(1,
                 score.getTitle());
-        stmt.setInt(2,
+        stmtToScores.setInt(2,
                 userId);
-        stmt.executeUpdate();
+        stmtToScores.executeUpdate();
+        ResultSet resultSet = stmtToScores.getGeneratedKeys();
+        resultSet.next();
+        stmtToBalances.setInt(1, resultSet.getInt(1));
+        stmtToBalances.setDouble(2, score.getSum());
+        stmtToBalances.executeUpdate();
     }
 
     private static boolean isExistScore (String title, int id, Connection connection) {

@@ -44,7 +44,7 @@ public class ScoreFrame extends JFrame implements ActionListener {
         final String titleText = title.getText();
         final double sumScore = Double.parseDouble(sum.getText());
         this.user = new User("1", "sdhjf");
-        user.setId(1);
+        user.setId(15);
         Score score = new Score(sumScore, user.getId(), titleText);
         try {
             ScoreController.createScore(score, user);
