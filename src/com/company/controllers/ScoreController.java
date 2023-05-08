@@ -50,7 +50,7 @@ public class ScoreController {
     }
 
     public static ResultSet getAllScores (User user) {
-        String sql = "SELECT Scores.title, Balances.sum\nFROM Scores\nJOIN Balances ON Scores.id = Balances.scoreId\nWHERE Scores.userId = ?";
+        String sql = "SELECT Scores.title, Balances.sum FROM Scores\nJOIN Balances ON Scores.id = Balances.scoreId\nWHERE Scores.userId = ?";
         try {
             Connection connection = new Database().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
