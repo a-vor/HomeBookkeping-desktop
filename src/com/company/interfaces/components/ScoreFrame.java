@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class ScoreFrame extends JFrame implements ActionListener {
     public User user;
-    private JTable scoresTable;
+    private final JTable scoresTable;
     private final JTextField title;
     private final JTextField sum;
     private final JButton confirm;
