@@ -33,6 +33,9 @@ public class ScoresPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
 
         this.add(scrollPane);
+    }
 
+    public JTable getTable() {
+        return table;
     }
 }
