@@ -16,7 +16,6 @@ public class Index extends JFrame {
     private final ScoresPanel scoresPanel;
     public Index(User user){
         this.user = user;
-        System.out.println(user.toString());
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setJMenuBar(new TopMenu());
         scoresPanel = new ScoresPanel(user);

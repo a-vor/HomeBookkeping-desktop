@@ -13,7 +13,6 @@ public class ScoresPanel extends JPanel {
     private final JTable table;
     public ScoresPanel(User user){
         this.user = user;
-        System.out.println("Из scores Panel : " + user.toString());
         ResultSet resultSet = ScoreController.getAllScores(user);
         DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"N", "Счет", "Баланс"}, 0);
         try {
