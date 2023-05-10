@@ -80,7 +80,6 @@ public class Auth extends JFrame implements ActionListener {
                 this.isAuth = true;
                 dispose();
             }
-
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

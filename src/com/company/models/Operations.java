@@ -1,22 +1,27 @@
 package com.company.models;
 
-public class Operations {
-    public int id, categoryId, scoreId;
-    public int money;
-    public String review;
+import java.util.Date;
 
-    public Operations(int id, int categoryId, int scoreId, int money, String review) {
-        this.id = id;
+public class Operations {
+    protected int id, categoryId, scoreId;
+
+    protected Date date;
+    protected int money;
+    protected String review;
+
+    public Operations(int categoryId, int scoreId, Date date, int money, String review) {
         this.categoryId = categoryId;
         this.scoreId = scoreId;
+        this.date = date;
         this.money = money;
         this.review = review;
     }
 
-    public Operations(int categoryId, int scoreId, int money, String review) {
+    public Operations(int id, int categoryId, int scoreId, Date date, int money, String review) {
         this.id = id;
         this.categoryId = categoryId;
         this.scoreId = scoreId;
+        this.date = date;
         this.money = money;
         this.review = review;
     }

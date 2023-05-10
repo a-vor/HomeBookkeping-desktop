@@ -1,6 +1,7 @@
 package com.company.interfaces.components;
 
 import com.company.controllers.ScoreController;
+import com.company.middleware.MainTableChanger;
 import com.company.models.Score;
 import com.company.models.User;
 
@@ -44,9 +45,7 @@ public class ScoreFrame extends JFrame implements ActionListener {
         final double sumScore = Double.parseDouble(sum.getText());
         try {
             ScoreController.createScore(new Score(sumScore, user.getId(), titleText), user);
-            Object[] newScore = {this.scoresTable.getRowCount() + 1, titleText, sumScore};
-            DefaultTableModel model = (DefaultTableModel) this.scoresTable.getModel();
-            model.addRow(newScore);
+            MainTableChanger.addScoreRow(scoresTable, titleText, sumScore);
             dispose();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
