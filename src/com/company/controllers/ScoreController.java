@@ -34,7 +34,7 @@ public class ScoreController {
     }
 
     private static boolean isExistScore (String title, int id, Connection connection) {
-        String sql = "SELECT * FROM Scores WHERE title = ? AND userId = ?";
+        String sql = "SELECT id FROM Scores WHERE title = ? AND userId = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1,
                     title);

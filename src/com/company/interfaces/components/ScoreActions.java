@@ -1,15 +1,19 @@
 package com.company.interfaces.components;
 
+import com.company.models.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ScoreActions extends JPanel implements ActionListener {
+    User user;
     private JButton addScore;
     private JButton renameScore;
     private JButton delScore;
-    public ScoreActions() {
+    public ScoreActions(User user) {
+        this.user = user;
         this.setLayout(new GridLayout(1, 6, 10, 0));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 75));
         addScore = new JButton("Добавить");
@@ -26,12 +30,12 @@ public class ScoreActions extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addScore) {
-            System.out.println("addScore");
+            new ScoreFrame(user);
         }
-        if (e.getSource() == addScore) {
+        if (e.getSource() == renameScore) {
             System.out.println("renameScore");
         }
-        if (e.getSource() == addScore) {
+        if (e.getSource() == delScore) {
             System.out.println("deleteScore");
         }
     }

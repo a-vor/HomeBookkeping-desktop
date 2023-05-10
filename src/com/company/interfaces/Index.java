@@ -27,7 +27,7 @@ public class Index extends JFrame {
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         getContentPane().add(new ActionsMenu());
         getContentPane().add(scoresPanel);
-        getContentPane().add(new ScoreActions());
+        getContentPane().add(new ScoreActions(user));
         setDefaultSettings();
     }
 

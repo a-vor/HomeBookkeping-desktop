@@ -35,19 +35,13 @@ public class ScoreFrame extends JFrame implements ActionListener {
         setSize(300, 150);
         setVisible(true);
     }
-    public static void main(String[] args) {
-        new ScoreFrame(null);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         final String titleText = title.getText();
         final double sumScore = Double.parseDouble(sum.getText());
-        this.user = new User();
-        user.setId(15);//если что, это для теста, кринж
-        Score score = new Score(sumScore, user.getId(), titleText);
         try {
-            ScoreController.createScore(score, user);
+            ScoreController.createScore(new Score(sumScore, user.getId(), titleText), user);
             dispose();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
