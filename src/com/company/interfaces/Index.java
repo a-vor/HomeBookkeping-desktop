@@ -10,7 +10,6 @@ import com.company.models.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
 public class Index extends JFrame {
     User user;

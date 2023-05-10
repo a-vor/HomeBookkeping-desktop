@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 
 public class ScoreActions extends JPanel implements ActionListener {
     User user;
-    private JButton addScore;
-    private JButton renameScore;
-    private JButton delScore;
+    private final JButton addScore;
+    private final JButton renameScore;
+    private final JButton delScore;
     public ScoreActions(User user) {
         this.user = user;
         this.setLayout(new GridLayout(1, 6, 10, 0));

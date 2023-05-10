@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class ScoreController {
     public static void createScore (Score score, User user) throws SQLException {
-        Connection connection = new Database().getConnection();
+        Connection connection = Database.getConnection();
         if (isExistScore(score.getTitle(), score.getUserId(), connection)) {
             connection.close();
         } else {
@@ -52,7 +52,7 @@ public class ScoreController {
     public static ResultSet getAllScores (User user) {
         String sql = "SELECT Scores.title, Balances.sum FROM Scores\nJOIN Balances ON Scores.id = Balances.scoreId\nWHERE Scores.userId = ?";
         try {
-            Connection connection = new Database().getConnection();
+            Connection connection = Database.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, user.getId());
             ResultSet rs = stmt.executeQuery();

@@ -1,7 +1,6 @@
 package com.company.interfaces.components;
 
 import com.company.controllers.ScoreController;
-import com.company.controllers.UserController;
 import com.company.models.Score;
 import com.company.models.User;
 
