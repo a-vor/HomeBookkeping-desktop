@@ -1,19 +1,25 @@
 package com.company.models;
 
+import java.util.ArrayList;
+
 public class User {
     private int id;
 
     private String login, password, name;
 
+    private ArrayList<String> scoresList;
+
     public User(String login, String name, String password) {
         this.login = login;
         this.name = name;
         this.password = password;
+        this.scoresList = new ArrayList<String>();
     }
 
     public User(String login, String password) {
         this.login = login;
         this.password = password;
+        this.scoresList = new ArrayList<String>();
     }
 
     public void setId(int id) {
@@ -26,6 +32,10 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setScoresList(String title) {
+        this.scoresList.add(title);
     }
 
     public String getName() {
@@ -52,6 +62,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", scoresList=" + scoresList +
                 '}';
     }
 }
