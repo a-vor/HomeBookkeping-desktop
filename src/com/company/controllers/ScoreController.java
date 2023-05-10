@@ -58,7 +58,6 @@ public class ScoreController {
             ResultSet rs = stmt.executeQuery();
             return rs;
         } catch (SQLException e) {
-            System.out.println(e);
             return null;
         }
     }

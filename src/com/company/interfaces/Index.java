@@ -29,10 +29,6 @@ public class Index extends JFrame {
         setDefaultSettings();
     }
 
-    public ScoresPanel getScoresPanel() {
-        return scoresPanel;
-    }
-
     private void setDefaultSettings() {
         this.setTitle("Домашняя бухгалтерия | " + user.getName());
         this.setSize(700, 500);

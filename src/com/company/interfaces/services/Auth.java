@@ -14,10 +14,10 @@ import java.sql.SQLException;
 
 public class Auth extends JFrame implements ActionListener {
     private User user;
-    private JTextField loginField;
-    private JTextField passwordField;
-    private JButton registerButton;
-    private JLabel registerLabel;
+    private final JTextField loginField;
+    private final JTextField passwordField;
+    private final JButton registerButton;
+    private final JLabel registerLabel;
     public boolean isAuth = false;
     public boolean isRegisterChange = false;
 
